@@ -2,6 +2,8 @@ package org.katas.refactoring;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.summingDouble;
+
 public class Order {
     String customerName;
     String customerAddress;
@@ -23,5 +25,13 @@ public class Order {
 
     public List<LineItem> getLineItems() {
         return lineItems;
+    }
+
+    double getTotSalesTax() {
+        return getLineItems().stream().collect(summingDouble(LineItem::getSalesTax));
+    }
+
+    double getTotalAmountWithSalesTax() {
+        return getLineItems().stream().collect(summingDouble(LineItem::getTotalAmountWithSalesTax));
     }
 }

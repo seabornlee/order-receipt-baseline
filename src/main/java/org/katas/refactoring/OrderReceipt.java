@@ -1,9 +1,5 @@
 package org.katas.refactoring;
 
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.summingDouble;
-
 /**
  * OrderReceipt prints the details of order including customer name, address, description, quantity,
  * price and amount. It also calculates the sales tax @ 10% and prints as part
@@ -30,19 +26,11 @@ public class OrderReceipt {
     }
 
     private void appendTotalAmount(StringBuilder output) {
-        output.append("Total Amount").append('\t').append(getTotalAmountWithSalesTax());
+        output.append("Total Amount").append('\t').append(order.getTotalAmountWithSalesTax());
     }
 
     private void appendSalesTax(StringBuilder output) {
-        output.append("Sales Tax").append('\t').append(getTotSalesTax());
-    }
-
-    private double getTotSalesTax() {
-        return order.getLineItems().stream().collect(summingDouble(LineItem::getSalesTax));
-    }
-
-    private double getTotalAmountWithSalesTax() {
-        return order.getLineItems().stream().collect(summingDouble(LineItem::getTotalAmountWithSalesTax));
+        output.append("Sales Tax").append('\t').append(order.getTotSalesTax());
     }
 
     private void appendLineItems(StringBuilder output) {
