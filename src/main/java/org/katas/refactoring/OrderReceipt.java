@@ -20,11 +20,7 @@ public class OrderReceipt {
 		output.append(getHeader());
         output.append(getCustomerInformation());
 		output.append(getLineItems());
-
-		// prints the state tax
 		output.append("Sales Tax").append('\t').append(getTotSalesTax());
-
-        // print total amount
 		output.append("Total Amount").append('\t').append(getTotalAmountWithSalesTax());
 		return output.toString();
 	}
