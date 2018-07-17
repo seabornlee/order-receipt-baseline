@@ -21,14 +21,14 @@ public class OrderReceipt {
         output.append(getCustomerInformation());
 		output.append(getLineItems());
 
-		double totSalesTx = 0d;
+		double totSalesTax = 0d;
 		for (LineItem lineItem : order.getLineItems()) {
 			// calculate sales tax @ rate of 10%
-			totSalesTx += lineItem.getSalesTax();
+			totSalesTax += lineItem.getSalesTax();
 		}
 
 		// prints the state tax
-		output.append("Sales Tax").append('\t').append(totSalesTx);
+		output.append("Sales Tax").append('\t').append(totSalesTax);
 
         // print total amount
 		output.append("Total Amount").append('\t').append(getTotalAmountWithSalesTax());
