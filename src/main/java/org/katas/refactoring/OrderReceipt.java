@@ -25,7 +25,7 @@ public class OrderReceipt {
 		double tot = 0d;
 		for (LineItem lineItem : order.getLineItems()) {
 			// calculate sales tax @ rate of 10%
-			double salesTax = lineItem.totalAmount() * .10;
+			double salesTax = getSalesTax(lineItem);
 			totSalesTx += salesTax;
 
 			// calculate total amount of lineItem = price * quantity + 10 % sales tax
@@ -38,6 +38,10 @@ public class OrderReceipt {
         // print total amount
 		output.append("Total Amount").append('\t').append(tot);
 		return output.toString();
+	}
+
+	private double getSalesTax(LineItem lineItem) {
+		return lineItem.totalAmount() * .10;
 	}
 
 	private StringBuilder getLineItems() {
