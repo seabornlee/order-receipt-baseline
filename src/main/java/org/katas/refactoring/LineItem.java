@@ -29,11 +29,11 @@ public class LineItem {
         return price * quantity;
     }
 
-    double getSalesTax() {
+    public double getSalesTax() {
         return totalAmount() * SALES_RATE;
     }
 
-    double getTotalAmountWithSalesTax() {
+    public double getTotalAmountWithSalesTax() {
         return totalAmount() + getSalesTax();
     }
 }

@@ -5,9 +5,9 @@ import java.util.List;
 import static java.util.stream.Collectors.summingDouble;
 
 public class Order {
-    String customerName;
-    String customerAddress;
-    List<LineItem> lineItems;
+    private String customerName;
+    private String customerAddress;
+    private List<LineItem> lineItems;
 
     public Order(String customerName, String customerAddress, List<LineItem> lineItems) {
         this.customerName = customerName;
@@ -27,11 +27,11 @@ public class Order {
         return lineItems;
     }
 
-    double getTotSalesTax() {
+    public double getTotSalesTax() {
         return getLineItems().stream().collect(summingDouble(LineItem::getSalesTax));
     }
 
-    double getTotalAmountWithSalesTax() {
+    public double getTotalAmountWithSalesTax() {
         return getLineItems().stream().collect(summingDouble(LineItem::getTotalAmountWithSalesTax));
     }
 }
