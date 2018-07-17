@@ -22,12 +22,13 @@ public class OrderReceipt {
 		output.append(getLineItems());
 
 		double totSalesTx = 0d;
-		double tot = 0d;
 		for (LineItem lineItem : order.getLineItems()) {
 			// calculate sales tax @ rate of 10%
 			totSalesTx += lineItem.getSalesTax();
+		}
 
-			// calculate total amount of lineItem = price * quantity + 10 % sales tax
+		double tot = 0d;
+		for (LineItem lineItem : order.getLineItems()) {
 			tot += lineItem.totalAmount() + lineItem.getSalesTax();
 		}
 
