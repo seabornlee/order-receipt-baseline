@@ -44,11 +44,7 @@ public class OrderReceipt {
     }
 
     private double getTotalAmountWithSalesTax() {
-        double totalAmountWithSalesTax = 0d;
-        for (LineItem lineItem : order.getLineItems()) {
-            totalAmountWithSalesTax += lineItem.totalAmount() + lineItem.getSalesTax();
-        }
-        return totalAmountWithSalesTax;
+        return order.getLineItems().stream().mapToDouble(l -> l.totalAmount() + l.getSalesTax()).sum();
     }
 
     private StringBuilder getLineItems() {
