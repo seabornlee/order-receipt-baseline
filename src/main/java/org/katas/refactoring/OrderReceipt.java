@@ -44,7 +44,11 @@ public class OrderReceipt {
     }
 
     private double getTotalAmountWithSalesTax() {
-        return order.getLineItems().stream().mapToDouble(l -> l.totalAmount() + l.getSalesTax()).sum();
+        return order.getLineItems().stream().mapToDouble(l -> getTotalAmountWithSalesTax(l)).sum();
+    }
+
+    private double getTotalAmountWithSalesTax(LineItem l) {
+        return l.totalAmount() + l.getSalesTax();
     }
 
     private StringBuilder getLineItems() {
