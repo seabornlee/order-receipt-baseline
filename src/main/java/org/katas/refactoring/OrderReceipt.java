@@ -16,25 +16,21 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        output.append(getHeader());
-        output.append(getCustomerInformation());
-        output.append(getLineItems());
-        output.append(getSalesTax());
-        output.append(getTotalAmount());
+        appendHeader(output);
+        appendCustomerInformation(output);
+        appendLineItems(output);
+        appendSalesTax(output);
+        appendTotalAmount(output);
 
         return output.toString();
     }
 
-    private StringBuilder getTotalAmount() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Total Amount").append('\t').append(getTotalAmountWithSalesTax());
-        return builder;
+    private void appendTotalAmount(StringBuilder output) {
+        output.append("Total Amount").append('\t').append(getTotalAmountWithSalesTax());
     }
 
-    private StringBuilder getSalesTax() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Sales Tax").append('\t').append(getTotSalesTax());
-        return builder;
+    private void appendSalesTax(StringBuilder output) {
+        output.append("Sales Tax").append('\t').append(getTotSalesTax());
     }
 
     private double getTotSalesTax() {
@@ -45,16 +41,13 @@ public class OrderReceipt {
         return order.getLineItems().stream().mapToDouble(l -> l.getTotalAmountWithSalesTax()).sum();
     }
 
-    private StringBuilder getLineItems() {
-        StringBuilder builder = new StringBuilder();
+    private void appendLineItems(StringBuilder output) {
         for (LineItem lineItem : order.getLineItems()) {
-            builder.append(getLineItem(lineItem));
+            appendLineItem(output, lineItem);
         }
-        return builder;
     }
 
-    private StringBuilder getLineItem(LineItem lineItem) {
-        StringBuilder output = new StringBuilder();
+    private void appendLineItem(StringBuilder output, LineItem lineItem) {
         output.append(lineItem.getDescription());
         output.append('\t');
         output.append(lineItem.getPrice());
@@ -63,14 +56,14 @@ public class OrderReceipt {
         output.append('\t');
         output.append(lineItem.totalAmount());
         output.append('\n');
-        return output;
     }
 
-    private String getCustomerInformation() {
-        return order.getCustomerName() + order.getCustomerAddress();
+    private void appendCustomerInformation(StringBuilder output) {
+        output.append(order.getCustomerName()).append(order.getCustomerAddress());
     }
 
-    private String getHeader() {
-        return "======Printing Orders======\n";
+    private void appendHeader(StringBuilder output) {
+        output.append("======Printing Orders======\n");
     }
+
 }
