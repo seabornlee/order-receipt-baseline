@@ -21,10 +21,8 @@ public class OrderReceipt {
         output.append(getCustomerInformation());
 		output.append(getLineItems());
 
-		double totSalesTax = getTotSalesTax();
-
 		// prints the state tax
-		output.append("Sales Tax").append('\t').append(totSalesTax);
+		output.append("Sales Tax").append('\t').append(getTotSalesTax());
 
         // print total amount
 		output.append("Total Amount").append('\t').append(getTotalAmountWithSalesTax());
