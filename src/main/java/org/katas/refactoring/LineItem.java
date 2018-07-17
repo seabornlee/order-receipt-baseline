@@ -4,13 +4,13 @@ public class LineItem {
     private static final double SALES_RATE = .10;
     private String desc;
 	private double price;
-	private int qty;
+	private int quantity;
 
-	public LineItem(String desc, double price, int qty) {
+	public LineItem(String desc, double price, int quantity) {
 		super();
 		this.desc = desc;
 		this.price = price;
-		this.qty = qty;
+		this.quantity = quantity;
 	}
 
 	public String getDescription() {
@@ -22,11 +22,11 @@ public class LineItem {
 	}
 
 	public int getQuantity() {
-		return qty;
+		return quantity;
 	}
 
     double totalAmount() {
-        return price * qty;
+        return price * quantity;
     }
 
     double getSalesTax() {
