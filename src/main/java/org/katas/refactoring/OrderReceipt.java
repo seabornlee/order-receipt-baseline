@@ -27,13 +27,11 @@ public class OrderReceipt {
 			totSalesTx += lineItem.getSalesTax();
 		}
 
-		double totalAmountWithSalesTax = getTotalAmountWithSalesTax();
-
 		// prints the state tax
 		output.append("Sales Tax").append('\t').append(totSalesTx);
 
         // print total amount
-		output.append("Total Amount").append('\t').append(totalAmountWithSalesTax);
+		output.append("Total Amount").append('\t').append(getTotalAmountWithSalesTax());
 		return output.toString();
 	}
 
