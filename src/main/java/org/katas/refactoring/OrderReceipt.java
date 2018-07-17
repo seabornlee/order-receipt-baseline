@@ -20,9 +20,15 @@ public class OrderReceipt {
 		output.append(getHeader());
         output.append(getCustomerInformation());
 		output.append(getLineItems());
-		output.append("Sales Tax").append('\t').append(getTotSalesTax());
+		output.append(getSalesTax());
 		output.append("Total Amount").append('\t').append(getTotalAmountWithSalesTax());
 		return output.toString();
+	}
+
+	private StringBuilder getSalesTax() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Sales Tax").append('\t').append(getTotSalesTax());
+		return builder;
 	}
 
 	private double getTotSalesTax() {
