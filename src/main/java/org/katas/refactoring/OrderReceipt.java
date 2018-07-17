@@ -8,10 +8,10 @@ package org.katas.refactoring;
  * 
  */
 public class OrderReceipt {
-    private Order o;
+    private Order order;
 
-    public OrderReceipt(Order o) {
-        this.o = o;
+    public OrderReceipt(Order order) {
+        this.order = order;
 	}
 
 	public String printReceipt() {
@@ -22,14 +22,14 @@ public class OrderReceipt {
 
 		// print date, bill no, customer name
 //        output.append("Date - " + order.getDate();
-        output.append(o.getCustomerName());
-        output.append(o.getCustomerAddress());
+        output.append(order.getCustomerName());
+        output.append(order.getCustomerAddress());
 //        output.append(order.getCustomerLoyaltyNumber());
 
 		// prints lineItems
 		double totSalesTx = 0d;
 		double tot = 0d;
-		for (LineItem lineItem : o.getLineItems()) {
+		for (LineItem lineItem : order.getLineItems()) {
 			output.append(lineItem.getDescription());
 			output.append('\t');
 			output.append(lineItem.getPrice());
