@@ -1,30 +1,39 @@
 package org.katas.refactoring;
 
 public class LineItem {
-	private String desc;
-	private double p;
-	private int qty;
+	private static final double TAX_RATE = .10;
+	private String description;
+	private double price;
+	private int quantity;
 
-	public LineItem(String desc, double p, int qty) {
+	public LineItem(String description, double price, int quantity) {
 		super();
-		this.desc = desc;
-		this.p = p;
-		this.qty = qty;
+		this.description = description;
+		this.price = price;
+		this.quantity = quantity;
 	}
 
 	public String getDescription() {
-		return desc;
+		return description;
 	}
 
 	public double getPrice() {
-		return p;
+		return price;
 	}
 
 	public int getQuantity() {
-		return qty;
+		return quantity;
 	}
 
     double totalAmount() {
-        return p * qty;
+        return price * quantity;
+    }
+
+    double getTotSalesTax() {
+        return totalAmount() * TAX_RATE;
+    }
+
+    double getTotalAmountWithTax() {
+        return totalAmount() + getTotSalesTax();
     }
 }
