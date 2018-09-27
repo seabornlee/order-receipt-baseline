@@ -8,6 +8,8 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class OrderReceiptTest {
     @Test
@@ -58,6 +60,23 @@ public class OrderReceiptTest {
                 return 2;
             }
         };
+
+        OrderReceipt receipt = new OrderReceipt(order);
+
+        // when
+        String output = receipt.printReceipt();
+
+        // then
+        assertThat(output).contains("Sales Tax\t2");
+        assertThat(output).contains("Total Amount\t22");
+    }
+
+    @Test
+    public void shouldPrintSalesTaxInformationWithMockito() {
+        // given
+        Order order = mock(Order.class);
+        when(order.getTotalSalesTax()).thenReturn(2d);
+        when(order.getTotalAmountWithSalesTax()).thenReturn(22d);
 
         OrderReceipt receipt = new OrderReceipt(order);
 
