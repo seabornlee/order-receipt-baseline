@@ -27,4 +27,8 @@ public class LineItem {
     double totalAmount() {
         return p * qty;
     }
+
+	double getSalesTax() {
+		return totalAmount() * .10;
+	}
 }

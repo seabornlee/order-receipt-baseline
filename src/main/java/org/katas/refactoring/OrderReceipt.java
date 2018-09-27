@@ -17,18 +17,24 @@ public class OrderReceipt {
 	public String printReceipt() {
 		StringBuilder output = new StringBuilder();
 
-		// print headers
+		printHeaders(output);
+		printCustomerInformation(output);
+		printsLineItems(output);
+		printSalesTaxInformation(output);
+
+		return output.toString();
+	}
+
+	private void printHeaders(StringBuilder output) {
 		output.append("======Printing Orders======\n");
+	}
 
-		// print date, bill no, customer name
-//        output.append("Date - " + order.getDate();
-        output.append(order.getCustomerName());
-        output.append(order.getCustomerAddress());
-//        output.append(order.getCustomerLoyaltyNumber());
+	private void printCustomerInformation(StringBuilder output) {
+		output.append(order.getCustomerName());
+		output.append(order.getCustomerAddress());
+	}
 
-		// prints lineItems
-		double totSalesTx = 0d;
-		double tot = 0d;
+	private void printsLineItems(StringBuilder output) {
 		for (LineItem lineItem : order.getLineItems()) {
 			output.append(lineItem.getDescription());
 			output.append('\t');
@@ -38,20 +44,12 @@ public class OrderReceipt {
 			output.append('\t');
 			output.append(lineItem.totalAmount());
 			output.append('\n');
-
-			// calculate sales tax @ rate of 10%
-            double salesTax = lineItem.totalAmount() * .10;
-            totSalesTx += salesTax;
-
-            // calculate total amount of lineItem = price * quantity + 10 % sales tax
-            tot += lineItem.totalAmount() + salesTax;
 		}
-
-		// prints the state tax
-		output.append("Sales Tax").append('\t').append(totSalesTx);
-
-        // print total amount
-		output.append("Total Amount").append('\t').append(tot);
-		return output.toString();
 	}
+
+	private void printSalesTaxInformation(StringBuilder output) {
+		output.append("Sales Tax").append('\t').append(order.getTotalSalesTax());
+		output.append("Total Amount").append('\t').append(order.getTotalAmountWithSalesTax());
+	}
+
 }

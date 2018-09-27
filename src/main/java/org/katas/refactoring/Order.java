@@ -24,4 +24,22 @@ public class Order {
     public List<LineItem> getLineItems() {
         return li;
     }
+
+    double getTotalAmountWithSalesTax() {
+        double totalAmountWithSalesTax = 0d;
+        for (LineItem lineItem : getLineItems()) {
+// calculate total amount of lineItem = price * quantity + 10 % sales tax
+totalAmountWithSalesTax += lineItem.totalAmount() + lineItem.getSalesTax();
+        }
+        return totalAmountWithSalesTax;
+    }
+
+    double getTotalSalesTax() {
+        double totalSalesTax = 0d;
+        for (LineItem lineItem : getLineItems()) {
+            // calculate sales tax @ rate of 10%
+            totalSalesTax += lineItem.getSalesTax();
+        }
+        return totalSalesTax;
+    }
 }
