@@ -3,6 +3,7 @@ package org.katas.refactoring;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -24,7 +25,7 @@ public class OrderReceiptTest {
     }
 
     @Test
-    public void shouldPrintLineItemAndSalesTaxInformation() {
+    public void shouldPrintLineItems() {
         // given
         List<LineItem> lineItems = asList(
                 new LineItem("milk", 10.0, 2),
@@ -40,7 +41,31 @@ public class OrderReceiptTest {
         assertThat(output).contains("milk\t10.0\t2\t20.0\n");
         assertThat(output).contains("biscuits\t5.0\t5\t25.0\n");
         assertThat(output).contains("chocolate\t20.0\t1\t20.0\n");
-        assertThat(output).contains("Sales Tax\t6.5");
-        assertThat(output).contains("Total Amount\t71.5");
+    }
+
+    @Test
+    public void shouldPrintSalesTaxInformation() {
+        // given
+        Order order = new Order(null, null, Collections.<LineItem>emptyList()) {
+
+            @Override
+            double getTotalAmountWithSalesTax() {
+                return 22;
+            }
+
+            @Override
+            double getTotalSalesTax() {
+                return 2;
+            }
+        };
+
+        OrderReceipt receipt = new OrderReceipt(order);
+
+        // when
+        String output = receipt.printReceipt();
+
+        // then
+        assertThat(output).contains("Sales Tax\t2");
+        assertThat(output).contains("Total Amount\t22");
     }
 }
