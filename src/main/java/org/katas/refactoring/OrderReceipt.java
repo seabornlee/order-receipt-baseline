@@ -16,27 +16,37 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        appendHeader(output);
-        appendCustomerInformation(output);
-        appendLineItems(output);
-        appendSalesTax(output);
-        appendTotalAmount(output);
+        output.append(getHeader());
+        output.append(getCustomerInformation());
+        output.append(getLineItems());
+        output.append(getSalesTax());
+        output.append(getTotalAmount());
 
         return output.toString();
     }
 
-    private void appendTotalAmount(StringBuilder output) {
+    private String getHeader() {
+        return "======Printing Orders======\n";
+    }
+
+    private String getTotalAmount() {
+        StringBuilder output = new StringBuilder();
         output.append("Total Amount").append('\t').append(order.getTotalAmountWithSalesTax());
+        return output.toString();
     }
 
-    private void appendSalesTax(StringBuilder output) {
+    private String getSalesTax() {
+        StringBuilder output = new StringBuilder();
         output.append("Sales Tax").append('\t').append(order.getTotSalesTax());
+        return output.toString();
     }
 
-    private void appendLineItems(StringBuilder output) {
+    private String getLineItems() {
+        StringBuilder output = new StringBuilder();
         for (LineItem lineItem : order.getLineItems()) {
             appendLineItem(output, lineItem);
         }
+        return output.toString();
     }
 
     private void appendLineItem(StringBuilder output, LineItem lineItem) {
@@ -50,12 +60,11 @@ public class OrderReceipt {
         output.append('\n');
     }
 
-    private void appendCustomerInformation(StringBuilder output) {
-        output.append(order.getCustomerName()).append(order.getCustomerAddress());
-    }
-
-    private void appendHeader(StringBuilder output) {
-        output.append("======Printing Orders======\n");
+    private String getCustomerInformation() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(order.getCustomerName())
+                .append(order.getCustomerAddress());
+        return builder.toString();
     }
 
 }
