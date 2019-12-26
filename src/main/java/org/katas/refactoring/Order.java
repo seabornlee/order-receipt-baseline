@@ -4,34 +4,34 @@ import java.util.List;
 
 import static java.util.stream.Collectors.summingDouble;
 
-public class Order {
+class Order {
     private String customerName;
     private String customerAddress;
     private List<LineItem> lineItems;
 
-    public Order(String customerName, String customerAddress, List<LineItem> lineItems) {
+    Order(String customerName, String customerAddress, List<LineItem> lineItems) {
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.lineItems = lineItems;
     }
 
-    public String getCustomerName() {
+    String getCustomerName() {
         return customerName;
     }
 
-    public String getCustomerAddress() {
+    String getCustomerAddress() {
         return customerAddress;
     }
 
-    public List<LineItem> getLineItems() {
+    List<LineItem> getLineItems() {
         return lineItems;
     }
 
-    public double getTotSalesTax() {
-        return getLineItems().stream().collect(summingDouble(LineItem::getSalesTax));
+    double getTotSalesTax() {
+        return getLineItems().stream().mapToDouble(LineItem::getSalesTax).sum();
     }
 
-    public double getTotalAmountWithSalesTax() {
-        return getLineItems().stream().collect(summingDouble(LineItem::getTotalAmountWithSalesTax));
+    double getTotalAmountWithSalesTax() {
+        return getLineItems().stream().mapToDouble(LineItem::getTotalAmountWithSalesTax).sum();
     }
 }
