@@ -24,7 +24,6 @@ public class OrderReceiptTest {
 
     // then
     assertThat(output).contains("Mr X");
-    assertThat(1).isEqualTo(2);
     assertThat(output).contains("Chicago, 60601");
   }
 
