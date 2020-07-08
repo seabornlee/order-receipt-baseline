@@ -16,6 +16,8 @@ public class Store {
         return TYPE_COMPANY_OWNED.equals(getType()) &&
                             "China".equals(location);
 
+        
+
     }
 
     public void setType(String type) {
