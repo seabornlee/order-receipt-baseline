@@ -11,6 +11,7 @@ public class Store {
 
     private String type;
 
+
     boolean isCompanyOwned() {
         return TYPE_COMPANY_OWNED.equals(getType()) &&
                 "China".equals(location);
